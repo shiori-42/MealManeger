@@ -1,16 +1,26 @@
 <template>
-  <div id="app">
-    <calorie-graph></calorie-graph>
-  </div>
+  <CalenHeader />
+  <Calender />
 </template>
 
 <script>
-import CalorieGraph from './components/CalorieGraph.vue';
+import Calender from './components/Calender.vue'
+import CalenHeader from './components/CalenHeader.vue'
 
 export default {
   name: 'App',
   components: {
-    CalorieGraph
+    Calender,CalenHeader
   }
-};
+}
 </script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+</style>
