@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "fresh-effort-406901",
+  "private_key_id": "215eb073ece35fc4663fd507b659dacc83457996",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCMKV3bzHlly6Yo\n1zo8SYfbTbHtiTOhtAvbsNsa2jvyLr7HIYHBcT8qzfyD2wb/Dkbvb/nP2iFOl9CJ\n5a3pWNCEdtte95wVdejHlkhI4ZhUKYvexrarPCn6ETkCbiZ8nf5Qw33tCXaugRFb\nzob+pJSmIno+KaTUb8MKZYDOHYb3habz0my5JYcn565+cQqeMiU0uwD+idLMlSco\nodr2WLrit5gm4rI6aB3HwrwOKD/Qi+o9VNdvWkakvT4mka1biRy3hgtSu12MuzSR\nnkkYWj505CNarPEkCCRgceuXFkXSqNfQGS4iU+BIJl8nEfe90QqOIvcSQu7ENW0z\nEd2t5qKlAgMBAAECggEAHDYLTT1XxfR6ikff0die/rYhtQTjno2FwX9UapA4dqOQ\nBLaqzkvEAhKZ29RPETFHd9Qa/QoToCUQdWEEYy5cMf1WZEQEZ5Fm/B00iW7W4UHH\nhFyM0eR3Mn0a83FGT9jhIlJm2zoHaFJUMx1bsI9h2BqibjallZi1MjeB+Hqa+uDg\njo4QuLS8HlRR5mAjVOugpzgczsfx66xRgaLdgVLsmLPjTA5WxxWodoGa+BablXtb\nz11TdistEjrJCm2grmTMfyNcDIWuIh5ILsID2eE5px+Y5ne3WxGn4Dif/8f/6RmM\nOylK/M7k6jIaARGPi9Xj2SPuRXIWGshy+RI7ISQP4QKBgQDEgyPAKo/TxbLzHJFp\nsZC2pDGFJizE89AQ9/LO6plx+9p8VqV9fuw0hqatHOqC5sXtsmYC8yW78L/Dc4Pp\n4vzJsP7TdQRdTT8lwWZGaJBMnJLbTgGEVItUNHV/Fw4nDqC/lXbiano4aijtGGlR\npkO/yRHDLQu/ugUXaITdsnR6rQKBgQC2l0pfVxw3GU3cG9UTqI0QCQV0zWwyjZnr\n8Q9Sww8bpsqOLlUFlYjYWPWuYNI6g8BBdoOR6LLH4tKLnktmC1qk4txQpr1VmsmL\ne/fqi9NsqozwSfv81dVegaO6kTn7se9r9QyRCeL5/x4kiq3WhkzY1Gc1EmhtsE2u\n+fpa/p/+2QKBgCZNgVxlb19Ru42TVeyKBbDz1Asl47gH5dhI2/Tk2T/UXUO7B8qs\nQJIEZNx9NGCLZqzsBuIwTnyRcm9ARsgBzE/rxd+lgVJGSjaruamjm+yy4BUK4VTP\nvdCN4RECh2mpej+dfGypYGU6m/uKtIyLoczx/hpS32VhdriXUL59mCKJAoGASnug\nvQ+d1OQfnMBFxUUmdfoYHbOGhYC530NwisRDL3Z0fldsG2EKd6aiYcXhPDlufcXI\nmgagl2Vxmb6y5yeOjGB2mvfJmFgSCzJAyY7MajGQWJz1jAf2iBy+G2cOjhvhnNpT\ni/7KdkyZkTJ5A1+5jWHn0AB4VPZsWgpjFCd2QNECgYAMdwPSP19Jofc85II7Nui0\n7U520IJReTvxvBZTOvEsENeHnqyz23mCZW9dZ/Rf8j5dGAkRhMPqBqSgwPueoaIf\nNNFXnq6aZRpeDQwgXBrZ7i8I1KV6HVec3MMTlUE5uxW/gObVOpLxrkmq2JWamFpR\nSM+nG9X2Z+q8rB510LwiJw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "diet-app-with-gpts@fresh-effort-406901.iam.gserviceaccount.com",
+  "client_id": "111222355759546613680",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/diet-app-with-gpts%40fresh-effort-406901.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
