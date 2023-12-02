@@ -1,48 +1,38 @@
 package main
 
 import (
+    "encoding/base64"
+    "encoding/json"
     "fmt"
-    "io"
+    "io/ioutil"
     "net/http"
-    "os"
 )
 
+// JSONリクエストを解析するための構造体
+type ImageRequest struct {
+    Image string `json:"image"`
+}
+
 func uploadFile(w http.ResponseWriter, r *http.Request) {
-    // リクエストがPOSTかどうか確認
-    if r.Method != "POST" {
-        http.Error(w, "Only POST method is allowed", http.StatusMethodNotAllowed)
+    var imgReq ImageRequest
+
+    // JSONリクエストボディを解析
+    if err := json.NewDecoder(r.Body).Decode(&imgReq); err != nil {
+        http.Error(w, "Error decoding JSON", http.StatusBadRequest)
         return
     }
 
-    // ファイルと他のフォームデータを解析
-    r.ParseMultipartForm(10 << 20) // 10 MBのファイルサイズ制限
-
-    // フォームから "image" というキーでファイルを取得
-    file, _, err := r.FormFile("image")
+    // Base64データをデコード
+    imgData, err := base64.StdEncoding.DecodeString(imgReq.Image)
     if err != nil {
-        http.Error(w, "Error retrieving the file", http.StatusInternalServerError)
-        fmt.Println("Error Retrieving the File")
-        fmt.Println(err)
+        http.Error(w, "Error decoding base64", http.StatusBadRequest)
         return
     }
-    defer file.Close()
 
-    // ファイルをサーバ上に保存
-    dst, err := os.Create("/tmp/uploaded_image.jpg") // 適切なファイルパスを指定
-    if err != nil {
+    // デコードされたデータをファイルに書き込む
+    filePath := "./success.jpg" // 適切なファイルパスを指定
+    if err := ioutil.WriteFile(filePath, imgData, 0644); err != nil {
         http.Error(w, "Error saving the file", http.StatusInternalServerError)
-        fmt.Println("Error Saving the File")
-        fmt.Println(err)
-        return
-    }
-    defer dst.Close()
-
-    // ファイルをコピー
-    _, err = io.Copy(dst, file)
-    if err != nil {
-        http.Error(w, "Error saving the file", http.StatusInternalServerError)
-        fmt.Println("Error Copying the File")
-        fmt.Println(err)
         return
     }
 
