@@ -230,7 +230,11 @@ func readFromSheet(userID string) ([]uploadData, error) {
 func main() {
 	http.HandleFunc("/upload", uploadHandler)
 	http.HandleFunc("/get", getDataHandler)
-
+	// Determine port for HTTP service.
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+		log.Printf("defaulting to port %s", port)}
 	fmt.Println("Server is running on port 8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }

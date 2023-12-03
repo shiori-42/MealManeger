@@ -149,7 +149,7 @@ export default {
     fetchUserData() {
       const userid = this.userid;
       console.log("userid=", userid);
-      fetch(`http://localhost:8080/get?userid=${userid}`)
+      fetch(`http://https://meal-manager-fzgjmrdeka-an.a.run.app/get?userid=${userid}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("ネットワークレスポンスが不正です。");

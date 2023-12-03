@@ -1,4 +1,4 @@
-module diet_app
+module demo.com/diet_app
 
 go 1.21.4
 
@@ -10,6 +10,7 @@ require (
 require (
 	cloud.google.com/go/compute v1.23.3 // indirect
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
+	github.com/GoogleCloudPlatform/functions-framework-go v1.8.0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/s2a-go v0.1.7 // indirect
