@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/nfnt/resize"
 	"golang.org/x/oauth2/google"
@@ -22,7 +23,7 @@ type uploadData struct {
 	Image    string `json:"image"`
 	Calories int    `json:"calories"`
 	UserId   string `json:"userid"`
-	Date     string `json:"date"`
+	Date     string // このフィールドはJSONから受け取らず、サーバー側で設定
 }
 
 func writeToSheet(data uploadData) error {
@@ -99,6 +100,10 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// 現在の日付をYYYY-MM-DD形式で取得
+	currentDate := time.Now().Format("2006-01-02")
+	data.Date = currentDate // uploadData構造体に日付を設定
+
 	// Resize Image
 	resizedImage, err := resizeImageBase64(data.Image)
 	if err != nil {
@@ -117,19 +122,18 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func resizeImageBase64(base64Image string) (string, error) {
-    imgData, err := base64.StdEncoding.DecodeString(base64Image)
-    if err != nil {
-        return "", fmt.Errorf("error decoding base64: %v", err)
-    }
+	imgData, err := base64.StdEncoding.DecodeString(base64Image)
+	if err != nil {
+		return "", fmt.Errorf("error decoding base64: %v", err)
+	}
 
-    resizedData, err := resizeImage(imgData, 800, 600)
-    if err != nil {
-        return "", fmt.Errorf("error resizing image: %v", err)
-    }
+	resizedData, err := resizeImage(imgData, 800, 600)
+	if err != nil {
+		return "", fmt.Errorf("error resizing image: %v", err)
+	}
 
-    return base64.StdEncoding.EncodeToString(resizedData), nil
+	return base64.StdEncoding.EncodeToString(resizedData), nil
 }
-
 
 func resizeImage(imgData []byte, maxWidth, maxHeight uint) ([]byte, error) {
 	img, _, err := image.Decode(bytes.NewReader(imgData))
