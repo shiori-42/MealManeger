@@ -28,7 +28,7 @@ type uploadData struct {
 
 func writeToSheet(data uploadData) error {
 	ctx := context.Background()
-	credsFilePath := os.Getenv("GOOGLE_APPLICATION_CREDENTIALS")
+	credsFilePath := "./backend/fresh-effort-406901-215eb073ece3.json"
 	if credsFilePath == "" {
 		log.Fatal("The GOOGLE_APPLICATION_CREDENTIALS environment variable is not set.")
 	}
