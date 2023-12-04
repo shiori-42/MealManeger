@@ -19,9 +19,12 @@
             class="w-100 h-100 d-flex align-items-center justify-content-center"
           >
             <div
-              class="border rounded"
-              :class="dayBorderClass(day.date)"
-              :style="{ backgroundColor: calculateColor(day.date.getDate()) }"
+              class="border rounded text-center"
+              :style="{
+                backgroundColor: calculateColor(
+                  calculateTotalCalories(day.date.toISOString().slice(0, 10))
+                ),
+              }"
               style="height: 30px; width: 30px; color: rgb(200, 200, 200)"
             >
               {{ day.date.getDate() }}
@@ -34,18 +37,21 @@
 </template>
 
 <script>
-var holiday = require("holiday-jp");
+// var holiday = require("holiday-jp");
+
 export default {
   name: "HelloWorld",
+  props: ["userid"],
   data() {
     return {
       weeks: this.generateWeeks(),
-      holidays: ["2023-01-01", "2023-12-25"], // 仮の祝日リスト
+      holidays: ["2023-01-01", "2023-12-25"],
+      userData: [],
     };
   },
   computed: {
     filteredWeeks() {
-      return this.weeks.filter((week) => this.isCase(week[0].date, 0));
+      return this.weeks.filter((week) => this.isCase(week[0].date, 12));
     },
   },
   methods: {
@@ -88,30 +94,18 @@ export default {
       }
       return newDate.getDate() <= 7;
     },
-    dayBorderClass(date) {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0); // 時間をリセットして日付のみの比較にする
-      const dayOfWeek = date.getDay();
-      // 今日の日付なら 'border-success' を返す
-      if (
-        date.toISOString().slice(0, 10) === today.toISOString().slice(0, 10)
-      ) {
-        return "border-warning";
-      } else if (holiday.isHoliday(date)) {
-        return "border-danger"; // 祝日の場合
-      } else if (dayOfWeek === 0) {
-        return "border-danger"; // 日曜日の場合
-      } else if (dayOfWeek === 6) {
-        return "border-primary"; // 土曜日の場合
-      } else {
-        return ""; // 平日の場合
-      }
-    },
     calculateColor(value) {
-      if (value <= 20) {
-        return this.interpolateColor("#ffffff", "#fb923c", value / 20);
-      } else if (value <= 40) {
-        return this.interpolateColor("#f87171", "#991b1b", (value - 20) / 20);
+      if (value == 0) {
+        return "#ebedf0";
+      }
+      if (value <= 2000) {
+        return this.interpolateColor("#ffffff", "#fb923c", value / 2000);
+      } else if (value <= 3000) {
+        return this.interpolateColor(
+          "#f87171",
+          "#991b1b",
+          (value - 2000) / 1000
+        );
       } else {
         return "#991b1b";
       }
@@ -138,11 +132,50 @@ export default {
         const month1 = date1.getMonth() + 1; // JavaScriptの月は0から始まるため、1を加算
         const month2 = date2.getMonth() + 1;
         if (month1 == 12 && month2 == 1) {
-          return false;
+          return true;
         }
         return month1 === mon || month2 === mon;
       }
     },
+    calculateTotalCalories(date) {
+      let totalCalories = 0;
+      this.userData.forEach((entry) => {
+        if (entry.Date === date) {
+          totalCalories += entry.calories;
+        }
+      });
+      return totalCalories;
+    },
+    fetchUserData() {
+      const userid = this.userid;
+      console.log("userid=", userid);
+      fetch(`https://meal-manager-fzgjmrdeka-de.a.run.app/get?userid=${userid}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("ネットワークレスポンスが不正です。");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          this.userData = data;
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error("データの取得中にエラーが発生しました:", error);
+        });
+    },
+  },
+  watch: {
+    userid(newVal) {
+      if (newVal) {
+        this.fetchUserData();
+      }
+    },
+  },
+  mounted() {
+    if (this.userid) {
+      this.fetchUserData();
+    }
   },
 };
 </script>

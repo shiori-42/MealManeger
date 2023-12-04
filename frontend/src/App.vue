@@ -1,26 +1,31 @@
 <template>
-  <CalenHeader />
-  <Calender />
+  <div>
+    <CalenHeader />
+    <Calender :userid="userid" />
+  </div>
 </template>
 
 <script>
-import Calender from './components/Calender.vue'
-import CalenHeader from './components/CalenHeader.vue'
+import CalenHeader from './components/CalenHeader.vue';
+import Calender from './components/Calender.vue';
 
 export default {
-  name: 'App',
   components: {
-    Calender,CalenHeader
+    CalenHeader,
+    Calender
+  },
+  data() {
+    return {
+      userid: null // 初期値をnullに設定
+    };
+  },
+  watch: {
+    '$route.query.userid'(newVal) {
+      this.userid = newVal;
+    }
+  },
+  mounted() {
+    this.userid = this.$route.query.userid; // コンポーネントがマウントされた時にクエリパラメータを読み込む
   }
-}
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-</style>

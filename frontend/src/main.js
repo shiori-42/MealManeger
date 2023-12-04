@@ -1,8 +1,19 @@
+// main.js
 import { createApp } from 'vue'
 import App from './App.vue'
 import 'bootstrap/dist/css/bootstrap.css';
-import '@fortawesome/fontawesome-svg-core'
-import '@fortawesome/free-solid-svg-icons'
-import '@fortawesome/vue-fontawesome'
+import { createRouter, createWebHistory } from 'vue-router';
 
-createApp(App).mount('#app')
+// ルートの定義
+const routes = [
+    { path: '/', component: App } // 他のルート定義もここに追加
+];
+
+// ルーターのインスタンスを作成
+const router = createRouter({
+    history: createWebHistory(),
+    routes,
+});
+
+// アプリケーションの作成とルーターのマウント
+createApp(App).use(router).mount('#app');

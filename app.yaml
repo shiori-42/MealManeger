@@ -1,0 +1,6 @@
+runtime: go113 --ge 
+env: standard
+
+handlers:
+- url: /.*
+  script: _go_app
